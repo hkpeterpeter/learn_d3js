@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    <svg id="chart"></svg>
+    <br>
+
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        
+       var arr = [1,5,3,7,4];
+       var arr2 = [
+            {name: "Peter", value: 5},
+            {name: "Ann", value: 2},
+            {name: "Cat", value: 3}
+       ];
+
+       // Statistics in d3-array
+
+       console.log( "min(arr) = " + d3.min(arr) );
+       console.log( "max(arr) = " + d3.max(arr) );
+       console.log( "extent(arr) = " + d3.extent(arr) );
+       console.log( "mean(arr) = " + d3.mean(arr));
+       console.log( "median(arr) = " + d3.median(arr));
+       var sortedArr = arr.slice(0).sort(); // copy an array and sort
+
+       // median should be equal to quantile = 0.5
+       console.log( "quantile(sortedArr) = " + d3.quantile(sortedArr, 0.5));
+       console.log( "variance(arr) = " + d3.variance(arr));
+       console.log( "deviation(arr) = " + d3.deviation(arr));
+
+       console.log( "min(arr2) = " + d3.min(arr2, v => v.value));
+       console.log( "max(arr2) = " + d3.max(arr2, v => v.value ));
+       console.log( "extent(arr2) = " + d3.extent(arr2, v => v.value));
+        
+
+    </script>
+</body>
+</html>

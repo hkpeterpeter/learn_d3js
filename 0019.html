@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    <svg id="chart"></svg>
+    <br>
+
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+       
+        // d3.range([start, ]stop[, step]) <>
+        // stop is exclusive (not included)
+
+        console.log( d3.range(10) ); // [0,1,...9]
+        console.log( d3.range(100) ); // [0...99]
+
+        // Use with caution for some unexpected behavior, for example:
+        console.log( d3.range(0, 1, 0.2) ); // [0, 0.2, 0.4, 0.6000000000000001, 0.8]
+
+        console.log( d3.range(0, 1, 1 / 49) ); // BAD: returns 50 elements!
+        console.log( d3.range(49).map(function(d) { return d / 49; }) ); // GOOD: returns 49 elements.
+
+
+    </script>
+</body>
+</html>

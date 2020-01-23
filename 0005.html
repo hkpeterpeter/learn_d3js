@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<body>
+
+    <p id="output"></p>
+
+    <hr>
+    Integer (in decimal): <input  id="textInput" type="text" value="100" placeholder="Enter a non-negative integer" >
+
+
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+
+        function decimal_html(n) {
+            return `<span>${n}<sub>(10)</sub></span>`;
+        }
+        function hex_html(n) {
+            const d = "0123456789ABCDEF";
+            let s = "";
+            while ( n > 0 ) {
+                s = d[ n % 16] + s ;
+                n = n / 16 | 0; 
+            }
+            return `<span>${s}<sub>(16)</sub></span>`;
+        }
+
+        var data = [parseInt( document.getElementById('textInput').value )];
+
+        function visualize() {
+   
+            
+
+            // Bind the data array to a selection
+            var selection = d3.select('#output') // The root of all paragraph elements we are going to add
+                .selectAll('div')  // The line is the hardest to understand, initially, no messages in the array
+                .data(data);
+
+            // Updating existing nodes
+            selection
+                .html( v => decimal_html(v) + " = " + hex_html(v) );
+
+            // Append new nodes
+            selection
+                .enter()
+                .append('div')
+                .html( v => decimal_html(v) + " = " + hex_html(v) );
+
+            // Delete nodes
+            selection
+                .exit()
+                .remove();
+        }
+       
+
+        window.addEventListener('load', visualize);
+        d3.select('#textInput').on('input', e => {
+            var v = parseInt( document.getElementById('textInput').value );
+            data.push(v);
+            visualize();
+        });
+        
+        
+
+        
+    </script>
+
+</body>
+</html>

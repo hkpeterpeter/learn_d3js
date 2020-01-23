@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    <svg id="chart"></svg>
+    <br>
+
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+       
+       var ret ;
+       ret = d3.permute(["a", "b", "c"], [1, 2, 0]) // returns ["b", "c", "a"]
+       console.log(ret);
+
+       var object = {yield: 27, variety: "Manchuria", year: 1931, site: "University Farm"},
+        fields = ["site", "variety", "yield"];
+
+       ret = d3.permute(object, fields); // returns ["University Farm", "Manchuria", 27]
+       console.log(ret);
+
+    </script>
+</body>
+</html>

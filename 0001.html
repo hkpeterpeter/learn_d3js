@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<body>
+
+    <p id="output"></p>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+
+        // Using append to append a single element to DOM
+
+        d3.select('#output')
+            .append('p')
+            .text( "d3 version: " + d3.version );
+        
+    </script>
+</body>
+</html>

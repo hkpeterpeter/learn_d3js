@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    <svg id="chart"></svg>
+    <br>
+
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+       
+       var ret;
+       ret = d3.pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
+       console.log(ret);
+
+       ret = d3.pairs([1, 2, 3, 4], (a, b) => b - a); // returns [1, 1, 1];
+       console.log(ret);
+       
+
+    </script>
+</body>
+</html>

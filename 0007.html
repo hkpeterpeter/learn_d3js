@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<body>
+    <div id="chart"></div>
+    <br>
+    <button id="btnAdd">Add</button>
+    <button id="btnRemoveLast">Remove Last</button>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        
+        var data = [
+            { group: "Very well", count: 550 },
+            { group: "Well", count: 700 },
+            { group: "Acceptable", count: 434},
+            { group: "Not well", count: 72},
+            { group: "Poorly", count: 34 }
+        ];
+
+        function visualize()
+        {
+            var x = d3.scaleLinear()
+                    .domain([0, d3.max(data, d => d.count )])
+                    .range([0, 800]);
+
+            var bars = d3.select("#chart")
+                .selectAll("div")
+                .data(data);
+
+            // update
+            bars.text( d => d.group + "(" + d.count  + ")" )
+                .transition()
+                .duration(1000)
+                .style("width", d => x(d.count) + "px")
+                .style("margin-bottom", "5px");
+
+            // enter
+            bars.enter()
+                .append("div")
+                .text( d => d.group + "(" + d.count  + ")" )
+                .style("width", "0px")
+                .transition()
+                .duration(1000)
+                .style("width", d => x(d.count) + "px")
+                .style("background-color", () => "hsl(" + Math.random() * 360 + ",100%,50%)" )
+                .style("margin-bottom", "5px");
+
+            // exit
+            bars.exit()
+                 .transition()
+                .duration(1000)
+                .style("width", d => 0 + "px")
+                .remove();
+
+        }
+
+        window.addEventListener('load', visualize);
+        d3.select("#btnAdd").on('click', () => {
+            data.push( { 
+                group: "added",
+                count: Math.floor(Math.random() * 1000) + 5
+            });
+            visualize();
+        });
+        d3.select("#btnRemoveLast").on('click', () => {
+            data.pop();
+            visualize();
+        });
+
+    </script>
+</body>
+</html>

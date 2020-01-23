@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<body>
+    <div id="chart"></div>
+    <br>
+    <button id="btnAdd">Add</button>
+    <button id="btnRemoveLast">Remove Last</button>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        
+        var data = [5, 9, 4];
+
+        function visualize()
+        {
+            var x = d3.scaleLinear()
+                    .domain([0, d3.max(data)])
+                    .range([0, 420]);
+
+            var bars = d3.select("#chart")
+                .selectAll("div")
+                .data(data);
+
+            // update
+            bars.text( d => d )
+                .transition()
+                .duration(1000)
+                .style("width", d => x(d) + "px")
+                .style("margin-bottom", "5px");
+
+            // enter
+            bars.enter()
+                .append("div")
+                .text( d => d )
+                .style("width", "0px")
+                .transition()
+                .duration(1000)
+                .style("width", d => x(d) + "px")
+                .style("background-color", () => "hsl(" + Math.random() * 360 + ",100%,50%)" )
+                .style("margin-bottom", "5px");
+
+            // exit
+            bars.exit()
+                 .transition()
+                .duration(1000)
+                .style("width", d => 0 + "px")
+                .remove();
+
+        }
+
+        window.addEventListener('load', visualize);
+        d3.select("#btnAdd").on('click', () => {
+            data.push( Math.floor(Math.random() * 10) + 5 );
+            visualize();
+        });
+        d3.select("#btnRemoveLast").on('click', () => {
+            data.pop();
+            visualize();
+        });
+
+    </script>
+</body>
+</html>

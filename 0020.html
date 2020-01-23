@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+       
+       // scale + axis usage:
+       // reference: https://github.com/d3/d3-axis/
+       
+       var margin = { left: 50, right: 50};
+       var x = d3.scaleLinear()
+                .domain([0,100])
+                .range([margin.left, 800-margin.right]);
+
+       var axis = d3.axisBottom(x);
+
+       d3.select("body")
+        .append("svg")
+        .attr("width", 800)
+        .attr("height", 20)
+        .append("g")
+        .call(axis);
+
+       var x2 = d3.scaleLinear()
+            .domain([-50, 50])
+            .range([margin.left, 800-margin.right]);
+
+       var axis2 = d3.axisBottom(x2);
+       d3.select("body")
+        .append("svg")
+        .attr("width", 800)
+        .attr("height", 20)
+        .append("g")
+        .call(axis2);
+
+        
+        var x3 = d3.scaleLinear()
+            .domain([0, 100])
+            .range([margin.left, 800-margin.right]);
+        var axis3 = d3.axisBottom(x3); // default: 10 ticks
+        d3.select("body")
+            .append("svg")
+            .attr("width", 800)
+            .attr("height", 20)
+            .append("g")
+            .call(axis3.ticks(20,",.2f")); // 20 ticks, and sample usage of tick format
+
+
+    </script>
+</body>
+</html>

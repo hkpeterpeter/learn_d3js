@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<body>
+
+    <p id="output"></p>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+
+        var messages = ["Hello, my name is Peter",
+            "Hi, how are you", 
+            "What is your name"];
+
+        // Bind the data array to a selection
+        d3.select('#output') // The root of all paragraph elements we are going to add
+            .selectAll('p')  // The line is the hardest to understand, initially, no messages in the array
+            .data(messages)
+            .enter()
+            .append('p')
+            .text( (m,i) => "Line " + (i+1) + " : " + m ); // each array item is m, return m directly
+        
+    </script>
+
+</body>
+</html>

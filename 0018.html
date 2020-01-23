@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    <svg id="chart"></svg>
+    <br>
+
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+       
+        // d3.ticks(start, stop, count) <>
+        //  Returns an array of approximately count+1 uniformly-spaced, nicely-rounded values
+        //  between start and stop (inclusive)
+        //  See also d3.tickIncrement (not sure how to use...), d3.tickStep and linear.ticks.
+
+        console.log( d3.ticks(0, 1, 5) );  // [0, 0.2, 0.4, 0.6, 0.8, 1]
+        console.log( d3.tickStep(0, 1, 5)); // tickStep = 0.2
+
+        console.log( d3.ticks(0, 100, 20));  // [0, 5, ... 100]
+        console.log( d3.tickStep( 0, 100, 20)); // tickStep = 5
+
+
+    </script>
+</body>
+</html>

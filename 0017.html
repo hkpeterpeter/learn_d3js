@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    <svg id="chart"></svg>
+    <br>
+
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+       
+       var arr = [1,2,3,4,5];
+       var arr2 = arr.slice(0); // make a copy
+
+
+       d3.shuffle(arr); // shuffle the array in-place
+       console.log(arr);
+
+       // optional start, and stop
+       // d3.shuffle(array[, start[, stop]]) <>
+
+       d3.shuffle(arr2, 0, 2);
+       console.log(arr2);
+
+    </script>
+</body>
+</html>

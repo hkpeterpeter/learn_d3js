@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<body>
+    <div id="chart"></div>
+    <br>
+
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        
+        var data = [
+            { group: "Very well", count: 550 },
+            { group: "Well", count: 700 },
+            { group: "Acceptable", count: 434},
+            { group: "Not well", count: 72},
+            { group: "Poorly", count: 34 }
+        ];
+
+        function visualize()
+        {
+            var x = d3.scaleLinear()
+                    .domain([0, d3.max(data, d => d.count )])
+                    .range([0, 800]);
+
+            var bars = d3.select("#chart")
+                .selectAll("div")
+                .data(data);
+
+            // without dynamic data update,
+            // only needs to care about the enter() stage
+
+            // enter
+            bars
+                .enter()
+                .append("div")
+                .text( d => d.group + "(" + d.count  + ")" )
+                .style("width", "0px")
+                .transition()
+                .duration(1000)
+                .style("width", d => x(d.count) + "px")
+                .style("background-color", () => "hsl(" + Math.random() * 360 + ",100%,50%)" )
+                .style("margin-bottom", "5px");         
+
+        }
+
+        window.addEventListener('load', visualize);
+  
+
+    </script>
+</body>
+</html>

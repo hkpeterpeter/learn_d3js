@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<body>
+
+    <p id="output"></p>
+    <button id="btnAdd">Add</button>
+    <button id="btnUpdate">Update</button>
+    <button id="btnRemoveLast">Remove last</button>
+    <button id="btnRemoveAll">Remove All</button>
+
+
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+
+        var messages = ["Hello, my name is Peter",
+            "Hi, how are you", 
+            "What is your name"];
+
+        function showtext(m, i) {
+            return "Line " + (i+1) + " : " + m ;
+        }
+
+        function update() {
+            d3.select('#output')
+                .selectAll('p')
+                .data(messages)
+                .text( (m,i) => showtext(m,i )); // each array item is m, return m directly
+        }
+        function enter() {
+            // Bind the data array to a selection
+            d3.select('#output') // The root of all paragraph elements we are going to add
+                .selectAll('p')  // The line is the hardest to understand, initially, no messages in the array
+                .data(messages)
+                .enter()
+                .append('p')
+                .text( (m,i) => showtext(m,i) ); // each array item is m, return m directly
+            
+        }
+        function remove() {
+            d3.select('#output')
+                .selectAll('p')
+                .data(messages)
+                .exit()
+                .remove();
+        }
+
+        window.addEventListener('load', enter);
+        d3.select('#btnAdd').on('click', e => {
+            messages.push("This is a new message");
+            enter();
+        });
+        d3.select('#btnUpdate').on('click', e => {
+            messages.forEach( (value, i, arr) => {
+                arr[i] = value + ' (updated)';
+            }, messages)
+            update();
+        });
+       
+        d3.select('#btnRemoveAll').on('click', e => {
+            messages = [];
+            remove();
+        });
+        d3.select('#btnRemoveLast').on('click', e => {
+            messages.pop();
+            remove();
+        });
+
+        
+    </script>
+
+</body>
+</html>

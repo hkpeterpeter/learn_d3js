@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    <svg id="chart"></svg>
+    <br>
+
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        
+       var p = [1,5];
+       var q = ["x","y","z"];
+
+       // d3.cross(a, b[, reducer]) 
+       var ret1 = d3.cross(p,q);
+       console.log(ret1);
+
+       var ret2 = d3.cross(p,q, (x,y) => x+y );
+       console.log(ret2);
+       
+
+    </script>
+</body>
+</html>
