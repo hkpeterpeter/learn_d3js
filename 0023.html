@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+
+        // learn a bit about d3-scale
+        // Reference: https://github.com/d3/d3-scale
+
+        // Create a function x: domain => range
+        var x = d3.scaleLinear()
+                .domain([-1, 1])
+                .range([0, 960]); 
+
+        
+        var ticks = x.ticks(5); 
+        console.log(ticks); // [-1, -0.5, 0, 0.5, 1]
+
+        var tickFormat = x.tickFormat(5, "+%");
+        console.log( ticks.map(tickFormat) );
+       
+
+        
+
+    </script>
+</body>
+</html>

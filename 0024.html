@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<body>
+    <div id="chart"></div>
+    <br>
+    <button id="btnAdd">Add</button>
+    <button id="btnRemoveLast">Remove Last</button>
+    <button id="btnRandomUpdate">Random Update</button>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        // join
+        //  combining enter, exit, update
+        //  Reference: (TODO read this reference!)
+        //   https://observablehq.com/@d3/selection-join
+        //   
+        
+        var data = [
+            { group: "A", count: 550 },
+            { group: "B", count: 700 },
+            { group: "C", count: 434},
+            { group: "D", count: 72},
+            { group: "E", count: 34 }
+        ];
+
+        function visualize()
+        {
+            var x = d3.scaleLinear()
+                    .domain([0, d3.max(data, d => d.count )])
+                    .range([0, 800]);
+
+            var bars = d3.select("#chart")
+                .selectAll("div")
+                .data(data)
+                .join("div") // Replacing the general enter, update, exit
+                .text( d => d.group + "(" + d.count  + ")" )
+                .style("width", d => "0px")
+                .style("width", d => x(d.count) + "px")
+                .style("border", "1px solid black")
+                .style("margin-bottom", "5px");
+
+          
+
+        }
+
+        window.addEventListener('load', visualize);
+        d3.select("#btnAdd").on('click', () => {
+            data.push( { 
+                group: "G",
+                count: Math.floor(Math.random() * 1000) + 5
+            });
+            visualize();
+        });
+        d3.select("#btnRemoveLast").on('click', () => {
+            data.pop();
+            visualize();
+        });
+        d3.select("#btnRandomUpdate").on('click', () => {
+
+            if (data.length > 0) {
+                var i = Math.floor(Math.random() * data.length );
+                data[i] = {
+                    group: "R",
+                    count: Math.floor(Math.random() * 1000) + 5
+                 } ;
+                visualize();
+            }
+        });
+
+    </script>
+</body>
+</html>
