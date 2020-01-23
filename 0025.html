@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<body>
+  
+    <button id="btnAdd">Add </button>
+    <button id="btnRemove">Remove </button>
+    <button id="btnUpdate">Update</button>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+      // Reference: https://github.com/d3/d3-selection/blob/v1.4.1/README.md#selection_data
+
+      const matrix = [
+        [11975,  5871, 8916, 2868],
+        [ 1951, 10048, 2060, 6171],
+        [ 8010, 16145, 8090, 8045],
+        [ 1013,   990,  940, 6907]
+        ];
+       const table =  d3.select("body")
+            .append("table");
+
+        function visualize() {
+            table
+            .selectAll("tr")
+            .data(matrix)
+            .join("tr")
+            .selectAll("td")
+            .data(d => d)
+            .join("td")
+         
+                .text(d => d);
+        }
+
+        visualize();
+        d3.select("#btnAdd").on('click', () => {
+            matrix.push([1,2,3,4]);
+            visualize();
+        });
+        d3.select("#btnRemove").on('click', () => {
+            matrix.pop();
+            visualize();
+        });
+        d3.select("#btnUpdate").on('click', () => {
+            if ( matrix.length ) {
+                matrix[0][0] = 999;
+                visualize();
+            }
+        });
+        
+
+    </script>
+</body>
+</html>
